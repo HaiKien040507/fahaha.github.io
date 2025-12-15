@@ -43,7 +43,6 @@ window.PRODUCTS = [
 
 // Ngoại văn
 { id:30, title:'English Novel – Classic', price:225000, category:'ngoai-van', img:'assets/book20.jpg', desc:'Tiểu thuyết tiếng Anh kinh điển.', pages:400, publisher:'Penguin Classics', format:'Bìa cứng' },
-// Novel (ngoại văn, văn học hiện đại)
 { id:31, title:'Modern English Novel', price:245000, oldPrice:270000, category:'ngoai-van', img:'assets/book31.jpg', desc:'Tiểu thuyết tiếng Anh hiện đại, nội dung sâu sắc.', pages:420, publisher:'Penguin Random House', format:'Bìa cứng' },
 { id:32, title:'Classic French Novel', price:235000, category:'ngoai-van', img:'assets/book32.jpg', desc:'Tiểu thuyết Pháp kinh điển, bản dịch chuẩn.', pages:380, publisher:'Gallimard', format:'Bìa mềm' },
 { id:33, title:'Japanese Novel – Bestseller', price:265000, category:'ngoai-van', img:'assets/book33.jpg', desc:'Tiểu thuyết Nhật Bản bán chạy nhất.', pages:350, publisher:'Kodansha', format:'Bìa mềm' },
@@ -60,4 +59,4 @@ window.PRODUCTS = [
 document.getElementById('book-category').innerText = product.category;
 document.getElementById('book-format').innerText = product.format || 'Đang cập nhật';
 document.getElementById('book-pages').innerText = product.pages ? product.pages + ' trang' : 'Đang cập nhật';
-document.getElementById('book-publisher').innerText = product.publisher || 'Đang cập nhật';
+document.getElementById('book-publisher').innerText = product.publisher || 'Đang cập nhật';    
