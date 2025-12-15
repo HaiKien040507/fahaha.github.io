@@ -1,0 +1,92 @@
+<!-- login.html -->
+<!DOCTYPE html><html lang="vi"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Đăng nhập</title><link rel="stylesheet" href="styles.css"></head><body>
+<div>
+  <!-- Topbar -->
+<div class="topbar">
+  <div class="container">
+    <div>Ưu đãi 12.12 • Freeship đơn từ 99k</div>
+    <div>Hotline: 1900 0000 • Hỗ trợ</div>
+  </div>
+</div>
+
+<!-- Header -->
+<header class="header">
+  <div class="container">
+    <a class="logo" href="index.html">BOOKSHOP DEMO</a>
+    <div class="search">
+      <input type="text" placeholder="Tìm kiếm..." onkeydown="if(event.key==='Enter') location.href='category.html?cat=all'">
+      <button onclick="location.href='category.html?cat=all'">Tìm kiếm</button>
+    </div>
+    <div class="actions" data-auth-box></div>
+    <a class="action" href="cart.html">Giỏ hàng <span class="pill" data-cart-count>0</span></a>
+  </div>
+</header>
+
+<!-- Nav -->
+<nav>
+  <div class="container">
+    <ul class="menu">
+      <li><a href="category.html?cat=all">Tất cả</a></li>
+      <li><a href="category.html?cat=van-hoc">Văn học</a></li>
+      <li><a href="category.html?cat=kinh-te">Kinh tế</a></li>
+      <li><a href="category.html?cat=thieu-nhi">Thiếu nhi</a></li>
+      <li><a href="category.html?cat=manga">Manga</a></li>
+      <li><a href="category.html?cat=ngoai-van">Ngoại văn</a></li>
+      <li><a href="promotions.html">Ưu đãi</a></li>
+    </ul>
+  </div>
+</nav>
+
+</div>
+
+<main class="container">
+  <form class="form" id="loginForm">
+    <h2>Đăng nhập</h2>
+    <div class="row"><input type="email" name="email" placeholder="Email" required></div>
+    <div class="row"><input type="password" name="password" placeholder="Mật khẩu" required></div>
+    <div class="row"><button class="btn primary" type="submit">Đăng nhập</button></div>
+    <p class="help">Chưa có tài khoản? <a href="register.html">Đăng ký</a></p>
+    <p id="loginMsg" class="help"></p>
+  </form>
+</main>
+
+<div>
+  <!-- Footer -->
+<footer>
+  <div class="container footer">
+    <div>
+      <h4>Giới thiệu</h4>
+      <p>Bookshop Demo phục vụ học tập/thử nghiệm giao diện. Thay bằng brand của bạn khi triển khai.</p>
+    </div>
+    <div>
+      <h4>Chính sách</h4>
+      <a href="policies/shipping.html">Vận chuyển</a>
+      <a href="policies/returns.html">Đổi trả</a>
+      <a href="policies/privacy.html">Bảo mật</a>
+      <a href="policies/terms.html">Điều khoản</a>
+    </div>
+    <div>
+      <h4>Liên hệ</h4>
+      <p>Email: hello@demo.vn</p>
+      <p>HCM, Việt Nam</p>
+    </div>
+    <div>
+      <h4>Ưu đãi</h4>
+      <a href="promotions.html">Mã giảm giá</a>
+    </div>
+  </div>
+  <div class="container copyright">© 2025 Bookshop Demo</div>
+</footer>
+</div>
+<script src="app.js"></script>
+<script>
+fetch('partials/header.html').then(r=>r.text()).then(h=>{ document.getElementById('layoutHeader').innerHTML=h; bindHeader(); });
+fetch('partials/footer.html').then(r=>r.text()).then(h=>{ document.getElementById('layoutFooter').innerHTML=h; });
+document.getElementById('loginForm').addEventListener('submit',(e)=>{
+  e.preventDefault();
+  const data = Object.fromEntries(new FormData(e.target).entries());
+  try{ login(data); location.href='index.html'; }catch(err){ document.getElementById('loginMsg').textContent = err.message; }
+});
+</script>
+</body></html>

@@ -1,0 +1,96 @@
+<!DOCTYPE html><html lang="vi"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Chính sách vận chuyển</title><link rel="stylesheet" href="../styles.css"></head><body>
+<div>
+  <!-- Topbar -->
+<div class="topbar">
+  <div class="container">
+    <div>Ưu đãi 12.12 • Freeship đơn từ 99k</div>
+    <div>Hotline: 1900 0000 • Hỗ trợ</div>
+  </div>
+</div>
+
+<!-- Header -->
+<header class="header">
+  <div class="container">
+    <a class="logo" href="../index.html">BOOKSHOP DEMO</a>
+    <div class="search">
+      <input type="text" placeholder="Tìm kiếm..." onkeydown="if(event.key==='Enter') location.href='category.html?cat=all'">
+      <button onclick="location.href='category.html?cat=all'">Tìm kiếm</button>
+    </div>
+    <div class="actions" data-auth-box></div>
+    <a class="action" href="cart.html">Giỏ hàng <span class="pill" data-cart-count>0</span></a>
+  </div>
+</header>
+</div>
+
+  <main class="container">
+    <section class="section">
+      <div class="section-header">
+        <div class="section-title">Trung tâm trợ giúp</div>
+      </div>
+      <p>Chào mừng bạn đến với Trung tâm trợ giúp của Bookshop Demo. Đây là nơi tập hợp các hướng dẫn và thông tin cần thiết để bạn có thể sử dụng dịch vụ một cách thuận tiện nhất.</p>
+      <p><strong>Hướng dẫn đặt hàng:</strong> Bạn có thể tìm kiếm sản phẩm qua thanh tìm kiếm, thêm vào giỏ hàng và tiến hành thanh toán theo các bước hiển thị trên màn hình.</p>
+      <p><strong>Phương thức thanh toán:</strong> Chúng tôi hỗ trợ nhiều hình thức như thẻ ngân hàng, ví điện tử (MoMo, ZaloPay, ShopeePay), và thanh toán khi nhận hàng.</p>
+      <p><strong>Theo dõi đơn hàng:</strong> Sau khi đặt hàng, bạn sẽ nhận được email xác nhận. Bạn có thể theo dõi trạng thái đơn hàng trong mục “Lịch sử mua hàng”.</p>
+      <p><strong>Chính sách vận chuyển:</strong> Đơn từ 99.000 đ được miễn phí vận chuyển nội thành. Thời gian giao hàng từ 1–3 ngày nội thành và 3–7 ngày liên tỉnh.</p>
+      <p>Nếu bạn gặp khó khăn, vui lòng tham khảo thêm mục <a href="faq.html">Câu hỏi thường gặp</a> hoặc liên hệ bộ phận CSKH để được hỗ trợ trực tiếp.</p>
+    </section>
+  </main>
+<div>
+  <!-- Footer -->
+<footer>
+  <div class="footer-container">
+    <div class="footer-col">
+      <h4>Giới thiệu</h4>
+      <p>Bookshop Demo - nền tảng sách trực tuyến hiện đại, phục vụ học tập và giải trí.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Chính sách</h4>
+      <ul>
+        <li><a href="../shipping.html">Vận chuyển</a></li>
+        <li><a href="../returns.html">Đổi trả</a></li>
+        <li><a href="../privacy.html">Bảo mật</a></li>
+        <li><a href="../terms.html">Điều khoản</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Hỗ trợ</h4>
+      <ul>
+        <li><a href="../contact-support.html">Trung tâm trợ giúp</a></li>
+        <li><a href="../help-center.html">Liên hệ CSKH</a></li>
+        <li><a href="../faq.html">Câu hỏi thường gặp</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Tài khoản</h4>
+      <ul>
+        <li><a href="../login.html">Đăng nhập</a></li>
+        <li><a href="../register.html">Đăng ký</a></li>
+        <li><a href="../account.html">Lịch sử mua hàng</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Liên hệ</h4>
+      <p>📍 351A Lạc Long Quân, Q.11, TP.HCM</p>
+      <p>📧 hello@demo.vn</p>
+      <p>📞 1900123456</p>
+      <div class="social-icons">
+        <a href="https://www.facebook.com/haikien.huynh"><i class="fab fa-facebook-f"></i></a>
+        <a href="https://www.instagram.com/ahtv.c2"><i class="fab fa-instagram"></i></a>
+        <a href="#"><i class="fab fa-tiktok"></i></a>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+  <div class="container copyright">© 2025 Bookshop Demo. All rights reserved.</div>
+</footer>
+</div>
+
+<script src="data.js"></script>
+<script src="app.js"></script>
+<script>
+  // Inject header/footer
+  fetch('partials/header.html').then(r=>r.text()).then(html=>{ document.getElementById('layoutHeader').innerHTML = html; bindHeader(); pageHome(); });
+  fetch('partials/footer.html').then(r=>r.text()).then(html=>{ document.getElementById('layoutFooter').innerHTML = html; });
+</script>
+</body></html>
