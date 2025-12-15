@@ -1,4 +1,4 @@
-// ====== Data & State ======
+
 let STATE = {
   user: JSON.parse(localStorage.getItem('user')) || null,
   cart: JSON.parse(localStorage.getItem('cart')) || [],
@@ -10,7 +10,7 @@ let STATE = {
 };
 
 // ====== Utils ======
-function fmt(n){ return n.toLocaleString('vi-VN') + ' đ'; }
+function fmt(n){ return n.toLocaleString('vi-VN') + ' ₫'; }
 function save(){ localStorage.setItem('user', JSON.stringify(STATE.user)); localStorage.setItem('cart', JSON.stringify(STATE.cart)); }
 function qs(s,root=document){ return root.querySelector(s); }
 function qsa(s,root=document){ return Array.from(root.querySelectorAll(s)); }
@@ -184,8 +184,17 @@ function pageCart(){
   const voucherInput = qs('#voucherInput'); const applyBtn = qs('#applyVoucher'); let applied;
   if(applyBtn){
     applyBtn.onclick = ()=>{
-      try{ applied = applyVoucher(voucherInput.value.trim()); qs('#voucherMsg').textContent = 'Áp dụng mã: '+applied.code; }
-      catch(e){ qs('#voucherMsg').textContent = e.message; applied=null; }
+      try{ 
+        applied = applyVoucher(voucherInput.value.trim()); 
+        qs('#voucherMsg').textContent = 'Áp dụng mã: '+applied.code;
+        // Lưu mã voucher vào localStorage để dùng ở trang checkout
+        localStorage.setItem('appliedVoucher', JSON.stringify(applied));
+      }
+      catch(e){ 
+        qs('#voucherMsg').textContent = e.message; 
+        applied=null;
+        localStorage.removeItem('appliedVoucher');
+      }
       renderTotals(applied);
     };
   }
@@ -199,15 +208,64 @@ function pageCart(){
   renderTotals();
 }
 function pageCheckout(){
-  const form = qs('#checkoutForm'); const sum = calcTotal();
-  qs('#orderSummary').textContent = `Tổng thanh toán: ${fmt(sum.total)} (Tạm tính ${fmt(sum.subtotal)})`;
+  const form = qs('#checkoutForm'); 
+  const qrBox = qs('#qrBox');
+  const qrImage = qs('#qrImage');
+  const qrAmount = qs('#qrAmount');
+  
+  if(!form) return;
+  
+  // ====== CẤU HÌNH NGÂN HÀNG - THAY ĐỔI Ở ĐÂY ======
+  const BANK_CONFIG = {
+    bankCode: 'VCB',              // Mã ngân hàng: VCB, TCB, MB, ACB, VPBank, Techcombank, etc.
+    accountNo: '7396775374',      // Số tài khoản của bạn
+    accountName: 'BOOKSHOP DEMO'  // Tên chủ tài khoản (viết HOA, không dấu)
+  };
+  // ===============================================
+  
+  // Lấy voucher đã áp dụng từ trang cart (nếu có)
+  let appliedVoucher = null;
+  try {
+    const saved = localStorage.getItem('appliedVoucher');
+    if(saved) appliedVoucher = JSON.parse(saved);
+  } catch(e) {}
+  
+  const sum = calcTotal(appliedVoucher);
+  qs('#orderSummary').textContent = `Tổng thanh toán: ${fmt(sum.total)} (Tạm tính ${fmt(sum.subtotal)}${appliedVoucher ? ', Giảm giá ' + fmt(sum.discount) : ''})`;
+  
+  // Lắng nghe thay đổi phương thức thanh toán
+  const paymentRadios = form.querySelectorAll('input[name="payment"]');
+  paymentRadios.forEach(radio => {
+    radio.addEventListener('change', function() {
+      if (this.value === 'bank') {
+        // Hiện QR
+        qrBox.style.display = 'block';
+        qrAmount.textContent = sum.total.toLocaleString('vi-VN');
+        
+        // Tạo link QR theo chuẩn VietQR
+        const qrUrl = `https://img.vietqr.io/image/${BANK_CONFIG.bankCode}-${BANK_CONFIG.accountNo}-compact.png?amount=${sum.total}&addInfo=Thanh+toan+don+hang&accountName=${encodeURIComponent(BANK_CONFIG.accountName)}`;
+        
+        qrImage.src = qrUrl;
+        
+        // Cập nhật thông tin hiển thị
+        qs('#bankName').textContent = BANK_CONFIG.bankCode;
+        qs('#bankAccount').textContent = BANK_CONFIG.accountNo;
+        qs('#bankAccountName').textContent = BANK_CONFIG.accountName;
+      } else {
+        qrBox.style.display = 'none';
+      }
+    });
+  });
+  
   form.addEventListener('submit',(e)=>{
     e.preventDefault();
     if(!STATE.user){ alert('Vui lòng đăng nhập trước khi thanh toán'); location.href='login.html'; return; }
     const data = Object.fromEntries(new FormData(form).entries());
     const order = {id: Date.now(), user: STATE.user, items: STATE.cart, total: sum.total, shipping:data};
     localStorage.setItem('lastOrder', JSON.stringify(order));
-    STATE.cart = []; save();
+    STATE.cart = []; 
+    localStorage.removeItem('appliedVoucher'); // Xóa voucher sau khi đặt hàng
+    save();
     alert('Đặt hàng thành công!'); location.href='account.html';
   });
 }
@@ -216,7 +274,7 @@ function pagePromotions(){
   if(!list) return;
   STATE.vouchers.forEach(v=>{
     const li = document.createElement('li');
-    li.innerHTML = `<strong>${v.code}</strong> — ${v.type==='percent'?`Giảm ${v.value}%`:'Miễn phí vận chuyển'} • Đơn tối thiểu ${fmt(v.min)}`;
+    li.innerHTML = `<strong>${v.code}</strong> – ${v.type==='percent'?`Giảm ${v.value}%`:'Miễn phí vận chuyển'} • Đơn tối thiểu ${fmt(v.min)}`;
     list.appendChild(li);
   });
 }

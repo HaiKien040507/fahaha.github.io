@@ -1,6 +1,69 @@
-<!-- checkout.html -->
-<!DOCTYPE html><html lang="vi"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Thanh toán</title><link rel="stylesheet" href="styles.css"></head><body>
+<!DOCTYPE html><html lang="vi"><head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Nhà sách trực tuyến</title><link rel="stylesheet" href="styles.css">
+<link rel="icon" type="image/png" href="assets/favicon.png">
+<style>
+  .payment-options {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin: 20px 0;
+  }
+  .payment-options label {
+    display: flex;
+    align-items: center;
+    padding: 15px;
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s;
+  }
+  .payment-options label:hover {
+    border-color: #4CAF50;
+    background: #f5f5f5;
+  }
+  .payment-options input[type="radio"] {
+    margin-right: 10px;
+    width: 18px;
+    height: 18px;
+  }
+  .payment-options input[type="radio"]:checked + span {
+    font-weight: bold;
+    color: #4CAF50;
+  }
+  .payment-options label:has(input:checked) {
+    border-color: #4CAF50;
+    background: #e8f5e9;
+  }
+  #qrBox {
+    margin: 20px auto;
+    padding: 30px;
+    background: #fff;
+    border: 2px solid #4CAF50;
+    border-radius: 12px;
+    text-align: center;
+    max-width: 400px;
+  }
+  #qrBox h3 {
+    color: #4CAF50;
+    margin-bottom: 15px;
+  }
+  #qrImage {
+    width: 250px;
+    height: 250px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    margin: 0 auto;
+  }
+  #qrAmount {
+    font-size: 24px;
+    font-weight: bold;
+    color: #d32f2f;
+  }
+</style>
+</head><body>
+
+<!-- include header/nav -->
 <div>
   <!-- Topbar -->
 <div class="topbar">
@@ -13,7 +76,7 @@
 <!-- Header -->
 <header class="header">
   <div class="container">
-    <a class="logo" href="index.html">BOOKSHOP DEMO</a>
+    <a class="logoo" href="index.html"><img src="assets/logo.jpg" height="100px" width="140px"></a>
     <div class="search">
       <input type="text" placeholder="Tìm kiếm..." onkeydown="if(event.key==='Enter') location.href='category.html?cat=all'">
       <button onclick="location.href='category.html?cat=all'">Tìm kiếm</button>
@@ -43,7 +106,7 @@
 <main class="container">
   <section class="section">
     <div class="section-header"><div class="section-title">Thanh toán</div></div>
-    <p id="orderSummary"></p>
+    <p id="orderSummary" style="font-size: 18px; font-weight: bold; color: #d32f2f; margin-bottom: 20px;"></p>
     <form class="form" id="checkoutForm">
       <h2>Thông tin giao hàng</h2>
       <div class="row"><input name="fullname" placeholder="Họ và tên" required></div>
@@ -59,12 +122,33 @@
           <option>Quận 1</option><option>Quận 3</option><option>Quận Phú Nhuận</option>
         </select>
       </div>
+      
       <h2>Phương thức thanh toán</h2>
-      <div class="row">
-        <label><input type="radio" name="payment" value="cod" required> Thanh toán khi nhận hàng (COD)</label>
-        <label><input type="radio" name="payment" value="bank"> Chuyển khoản</label>
+      <div class="payment-options">
+        <label>
+          <input type="radio" name="payment" value="cod" required checked>
+          <span>💵 Thanh toán khi nhận hàng (COD)</span>
+        </label>
+        <label>
+          <input type="radio" name="payment" value="bank">
+          <span>🏦 Chuyển khoản ngân hàng</span>
+        </label>
       </div>
-      <div class="row"><button class="btn primary" type="submit">Đặt hàng</button></div>
+      
+      <div id="qrBox" style="display:none;">
+        <h3>📱 Quét mã QR để thanh toán</h3>
+        <img id="qrImage" src="" alt="QR Code">
+        <p style="margin-top: 15px;">Số tiền: <span id="qrAmount"></span> VND</p>
+        <p style="font-size: 14px; color: #666; margin-top: 10px;">
+          Ngân hàng: <strong id="bankName">VCB</strong><br>
+          Số TK: <strong id="bankAccount">0123456789</strong><br>
+          Chủ TK: <strong id="bankAccountName">BOOKSHOP DEMO</strong>
+        </p>
+      </div>
+
+      <div class="row" style="margin-top: 30px;">
+        <button class="btn primary" type="submit">Đặt hàng</button>
+      </div>
       <p class="help">Đơn tối thiểu 99k được freeship tự động.</p>
     </form>
   </section>
@@ -73,34 +157,55 @@
 <div>
   <!-- Footer -->
 <footer>
-  <div class="container footer">
-    <div>
+  <div class="footer-container">
+    <div class="footer-col">
       <h4>Giới thiệu</h4>
-      <p>Bookshop Demo phục vụ học tập/thử nghiệm giao diện. Thay bằng brand của bạn khi triển khai.</p>
+      <p>Đồ án cuối kì thực hiện bởi nhóm Magaming - Shop bán hàng trực tuyến FAHAHA xin hân hạnh đón chào quý khách!</p>
     </div>
-    <div>
+    <div class="footer-col">
       <h4>Chính sách</h4>
-      <a href="policies/shipping.html">Vận chuyển</a>
-      <a href="policies/returns.html">Đổi trả</a>
-      <a href="policies/privacy.html">Bảo mật</a>
-      <a href="policies/terms.html">Điều khoản</a>
+      <ul>
+        <li><a href="policies/shipping.html">Vận chuyển</a></li>
+        <li><a href="policies/returns.html">Đổi trả</a></li>
+        <li><a href="policies/privacy.html">Bảo mật</a></li>
+        <li><a href="policies/terms.html">Điều khoản</a></li>
+      </ul>
     </div>
-    <div>
+    <div class="footer-col">
+      <h4>Hỗ trợ</h4>
+      <ul>
+        <li><a href="supports/contact-support.html">Trung tâm trợ giúp</a></li>
+        <li><a href="supports/help-center.html">Liên hệ CSKH</a></li>
+        <li><a href="supports/faq.html">Câu hỏi thường gặp</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Tài khoản</h4>
+      <ul>
+        <li><a href="login.html">Đăng nhập</a></li>
+        <li><a href="register.html">Đăng ký</a></li>
+        <li><a href="account.html">Lịch sử mua hàng</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
       <h4>Liên hệ</h4>
-      <p>Email: hello@demo.vn</p>
-      <p>HCM, Việt Nam</p>
+      <p>📍 351A Lạc Long Quân, Q.11, TP.HCM</p>
+      <p>📧 hello@demo.vn</p>
+      <p>📞 1900123456</p>
     </div>
-    <div>
-      <h4>Ưu đãi</h4>
-      <a href="promotions.html">Mã giảm giá</a>
+    <div class="footer-col">
+      <h4>Mạng xã hội</h4>
+      <div class="social-icons">
+        <a href="https://www.facebook.com/haikien.huynh"><img src ="assets/facebook.jpg" height="30px" width="30px" alt ="facebook.jpg" class="logo"></a> &nbsp;
+        <a href="https://www.instagram.com/ahtv.c2"><img src ="assets/instagram.jpg" height="30px" width="30px" alt ="ins.jpg" class="logo"> </a> &nbsp;
+        <a href="https://www.tiktok.com/@akari7687?is_from_webapp=1&sender_device=pc"><img src ="assets/tiktok.jpg" height="30px" width="30px" alt ="tt.jpg" class="logo"></a>
+      </div>
     </div>
   </div>
-  <div class="container copyright">© 2025 Bookshop Demo</div>
+  <div class="footer-bottom">
+  <div class="container copyright">© 2025 Bookshop Demo. All rights reserved.</div>
 </footer>
 </div>
+<script src="data.js"></script>
 <script src="app.js"></script>
-<script>
-fetch('partials/header.html').then(r=>r.text()).then(h=>{ document.getElementById('layoutHeader').innerHTML=h; bindHeader(); pageCheckout(); });
-fetch('partials/footer.html').then(r=>r.text()).then(h=>{ document.getElementById('layoutFooter').innerHTML=h; });
-</script>
 </body></html>

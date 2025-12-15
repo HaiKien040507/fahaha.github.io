@@ -1,6 +1,11 @@
-<!-- login.html -->
-<!DOCTYPE html><html lang="vi"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Đăng nhập</title><link rel="stylesheet" href="styles.css"></head><body>
+<!DOCTYPE html><html lang="vi"><head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Nhà sách trực tuyến</title><link rel="stylesheet" href="styles.css">
+<link rel="icon" type="image/png" href="assets/favicon.png">
+
+</head><body>
+
+<!-- include header/nav -->
 <div>
   <!-- Topbar -->
 <div class="topbar">
@@ -13,7 +18,7 @@
 <!-- Header -->
 <header class="header">
   <div class="container">
-    <a class="logo" href="index.html">BOOKSHOP DEMO</a>
+    <a class="logoo" href="index.html"><img src="assets/logo.jpg" height="100px" width="140px"></a>
     <div class="search">
       <input type="text" placeholder="Tìm kiếm..." onkeydown="if(event.key==='Enter') location.href='category.html?cat=all'">
       <button onclick="location.href='category.html?cat=all'">Tìm kiếm</button>
@@ -22,21 +27,6 @@
     <a class="action" href="cart.html">Giỏ hàng <span class="pill" data-cart-count>0</span></a>
   </div>
 </header>
-
-<!-- Nav -->
-<nav>
-  <div class="container">
-    <ul class="menu">
-      <li><a href="category.html?cat=all">Tất cả</a></li>
-      <li><a href="category.html?cat=van-hoc">Văn học</a></li>
-      <li><a href="category.html?cat=kinh-te">Kinh tế</a></li>
-      <li><a href="category.html?cat=thieu-nhi">Thiếu nhi</a></li>
-      <li><a href="category.html?cat=manga">Manga</a></li>
-      <li><a href="category.html?cat=ngoai-van">Ngoại văn</a></li>
-      <li><a href="promotions.html">Ưu đãi</a></li>
-    </ul>
-  </div>
-</nav>
 
 </div>
 
@@ -50,35 +40,59 @@
     <p id="loginMsg" class="help"></p>
   </form>
 </main>
-
 <div>
   <!-- Footer -->
 <footer>
-  <div class="container footer">
-    <div>
+  <div class="footer-container">
+    <div class="footer-col">
       <h4>Giới thiệu</h4>
-      <p>Bookshop Demo phục vụ học tập/thử nghiệm giao diện. Thay bằng brand của bạn khi triển khai.</p>
+      <p>Dồ án cuối kì thực hiện bỏi nhóm Magaming - Shop bán hàng trực tuyến FAHAHA xin hân hạnh đón chào quý khách!</p>
     </div>
-    <div>
+    <div class="footer-col">
       <h4>Chính sách</h4>
-      <a href="policies/shipping.html">Vận chuyển</a>
-      <a href="policies/returns.html">Đổi trả</a>
-      <a href="policies/privacy.html">Bảo mật</a>
-      <a href="policies/terms.html">Điều khoản</a>
+      <ul>
+        <li><a href="policies/shipping.html">Vận chuyển</a></li>
+        <li><a href="policies/returns.html">Đổi trả</a></li>
+        <li><a href="policies/privacy.html">Bảo mật</a></li>
+        <li><a href="policies/terms.html">Điều khoản</a></li>
+      </ul>
     </div>
-    <div>
+    <div class="footer-col">
+      <h4>Hỗ trợ</h4>
+      <ul>
+        <li><a href="supports/contact-support.html">Trung tâm trợ giúp</a></li>
+        <li><a href="supports/help-center.html">Liên hệ CSKH</a></li>
+        <li><a href="supports/faq.html">Câu hỏi thường gặp</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Tài khoản</h4>
+      <ul>
+        <li><a href="login.html">Đăng nhập</a></li>
+        <li><a href="register.html">Đăng ký</a></li>
+        <li><a href="account.html">Lịch sử mua hàng</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
       <h4>Liên hệ</h4>
-      <p>Email: hello@demo.vn</p>
-      <p>HCM, Việt Nam</p>
+      <p>📍 351A Lạc Long Quân, Q.11, TP.HCM</p>
+      <p>📧 hello@demo.vn</p>
+      <p>📞 1900123456</p>
     </div>
-    <div>
-      <h4>Ưu đãi</h4>
-      <a href="promotions.html">Mã giảm giá</a>
+    <div class="footer-col">
+      <h4>Mạng xã hội</h4>
+      <div class="social-icons">
+        <a href="https://www.facebook.com/haikien.huynh"><img src ="assets/facebook.jpg" height="30px" width="30px" alt ="facebook.jpg" class="logo"></a> &nbsp;
+        <a href="https://www.instagram.com/ahtv.c2"><img src ="assets/instagram.jpg" height="30px" width="30px" alt ="ins.jpg" class="logo"> </a> &nbsp;
+        <a href="https://www.tiktok.com/@akari7687?is_from_webapp=1&sender_device=pc"><img src ="assets/tiktok.jpg" height="30px" width="30px" alt ="tt.jpg" class="logo"></a>
+      </div>
     </div>
   </div>
-  <div class="container copyright">© 2025 Bookshop Demo</div>
+  <div class="footer-bottom">
+  <div class="container copyright">© 2025 Bookshop Demo. All rights reserved.</div>
 </footer>
 </div>
+<script src="data.js"></script>.
 <script src="app.js"></script>
 <script>
 fetch('partials/header.html').then(r=>r.text()).then(h=>{ document.getElementById('layoutHeader').innerHTML=h; bindHeader(); });
