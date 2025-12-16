@@ -1,6 +1,6 @@
-:root{--primary:#d0021b;--accent:#ff8a00;--bg:#f5f7fa;--text:#222;--muted:#666;--line:#e5e8ef;--card:#fff}
+:root{--primary:#39904D;--accent:#ff8a00;--bg:#f5f7fa;--text:#222;--muted:#666;--line:#e5e8ef;--card:#fff}
 *{box-sizing:border-box}html,body{margin:0;padding:0;background:var(--bg);color:var(--text);font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif}
-a{text-decoration:none;color:inherit}img{max-width:100%;display:block}.container{max-width:1200px;margin:0 auto;padding:0 16px}
+a{text-decoration:none;color:#000000}img{max-width:100%;display:block}.container{max-width:1200px;margin:0 auto;padding:0 16px}
 
 /* Topbar + Header + Nav (giống demo, rút gọn) */
 .topbar,.header,nav,footer{background:#fff}
